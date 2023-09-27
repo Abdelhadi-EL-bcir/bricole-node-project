@@ -1,0 +1,33 @@
+,
+    tele : {
+        type : String , 
+        required :true
+    } ,
+    address : {
+        type : String , 
+        required :true
+    } ,
+    about : {
+        type : String , 
+        required :true
+    } ,
+    facebook : {
+        type : String , 
+        required :true
+    } ,
+    linkedin : {
+        type : String , 
+        required :true
+    } ,
+    website : {
+        type : String , 
+        required :true
+    } ,
+    firstname  :{
+        type : String , 
+        required :true
+    } , 
+    lastname : {
+        type : String , 
+        required :true
+    } , 
