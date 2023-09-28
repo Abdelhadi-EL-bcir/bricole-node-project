@@ -4,7 +4,7 @@ import { createService, deleteService, getService, getServices, updateService } 
 const router = express.Router();
 
 
-router.post('/:cityId', createService)
+router.post('/:cityId/:typeId', createService)
 router.put("/:id",updateService)
 router.delete("/:id/:cityId",deleteService )
 router.get("/:id", getService)

@@ -5,6 +5,7 @@ import authRoute from "./routes/auth.js";
 import userRoute from "./routes/user.js";
 import serviceRoute from "./routes/service.js";
 import cityRoute from "./routes/city.js";
+import typeRoute from "./routes/type.js";
 import cookieParser from "cookie-parser";
 
 
@@ -34,6 +35,7 @@ app.use("/api/auth" , authRoute);
 app.use("/api/user" , userRoute);
 app.use("/api/service" , serviceRoute);
 app.use("/api/city" , cityRoute);
+app.use("/api/type" , typeRoute);
 
 
 app.use((err,req,res,next)=>{
