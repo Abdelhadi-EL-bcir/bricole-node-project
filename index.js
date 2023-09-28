@@ -12,7 +12,7 @@ const app = express();
 dotenv.config();
 const connection = async ()=>{
     try {
-         mongoose.connect("mongodb://localhost:27017/bricoly");
+         mongoose.connect(process.env.MONGO);
          console.log('Connected to mongoDB');
     } catch (error) {
         throw error ; 

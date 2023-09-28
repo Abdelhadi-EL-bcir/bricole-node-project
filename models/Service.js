@@ -12,6 +12,6 @@ const ServicSchema = new mongoose.Schema({
       type : String , 
       required : true
     }
-}) 
+} , {timestamps :true}) 
 
 export default mongoose.model("Service" , ServicSchema);
