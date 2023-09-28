@@ -5,6 +5,7 @@ import authRoute from "./routes/auth.js";
 import userRoute from "./routes/user.js";
 import serviceRoute from "./routes/service.js";
 import cityRoute from "./routes/city.js";
+import typeRoute from "./routes/type.js";
 import cookieParser from "cookie-parser";
 
 
@@ -12,7 +13,7 @@ const app = express();
 dotenv.config();
 const connection = async ()=>{
     try {
-         mongoose.connect("mongodb://localhost:27017/bricoly");
+         mongoose.connect(process.env.MONGO);
          console.log('Connected to mongoDB');
     } catch (error) {
         throw error ; 
@@ -34,6 +35,7 @@ app.use("/api/auth" , authRoute);
 app.use("/api/user" , userRoute);
 app.use("/api/service" , serviceRoute);
 app.use("/api/city" , cityRoute);
+app.use("/api/type" , typeRoute);
 
 
 app.use((err,req,res,next)=>{

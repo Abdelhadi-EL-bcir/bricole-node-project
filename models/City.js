@@ -3,7 +3,10 @@ const CitySchema = new mongoose.Schema({
     name  :{
         type : String , 
         required :true
+    } , 
+    servics : {
+        type : [String] , 
     }
 }) 
 
-export default mongoose.model("city" , CitySchema);
+export default mongoose.model("City" , CitySchema);
