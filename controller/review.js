@@ -3,24 +3,24 @@ import User from "../models/User.js";
 import Service from "../models/Service.js";
 
 export const createReview = async (req, res, next) => {
-    const userId = req.params.userId; 
+    const userId = req.params.userId;
     const serviceId = req.params.serviceId;
     const newReview = new Review(req.body);
     try {
         const savedReview = await newReview.save();
         try {
-            await User.findByIdAndUpdate(userId , {
-                $push : {reviews : savedService._id }
+            await User.findByIdAndUpdate(userId, {
+                $push: { reviews: savedService._id }
             });
 
-            await Service.findByIdAndUpdate(serviceId , {
-                $push : {reviews : savedService._id}
+            await Service.findByIdAndUpdate(serviceId, {
+                $push: { reviews: savedService._id }
             })
             res.status(200).json(savedReview);
         } catch (err) {
             next(err);
         }
-    }catch(err){
+    } catch (err) {
         next(err);
     }
 };
@@ -35,9 +35,26 @@ export const updateReview = async (req, res, next) => {
 }
 
 export const deleteReview = async (req, res, next) => {
+    const userId = req.params.userId;
+    const serviceId = req.params.serviceId;
     try {
         await Review.findByIdAndDelete(req.params.id);
-        res.status(200).json("Review has been deleted.");
+        try {
+            await City.findByIdAndUpdate(userId , {
+                $pull : {
+                    reviews : req.params.id
+                }
+            });
+
+            await Type.findByIdAndUpdate(serviceId , {
+                $pull : {
+                    reviews : req.params.id
+                }
+            })
+            res.status(200).json("Review has been deleted.");
+        } catch (err) {
+            next(err);
+        }
     } catch (err) {
         next(err);
     }

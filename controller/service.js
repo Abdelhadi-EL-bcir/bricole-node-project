@@ -1,9 +1,12 @@
 import Service from "../models/Service.js";
 import City from "../models/City.js";
 import Type from "../models/Type.js";
+import User from "../models/User.js";
 export const createService =  async (req, res , next) => {
     const cityId = req.params.cityId;
     const typeId = req.params.typeId;
+    const userId = req.params.userId;
+
     const newService = new Service(req.body);
     try {
         const savedService = await newService.save();
@@ -14,7 +17,11 @@ export const createService =  async (req, res , next) => {
 
             await Type.findByIdAndUpdate(typeId , {
                 $push : {servics : savedService._id}
-            })
+            });
+
+            await User.findByIdAndUpdate(userId , {
+                $push : {servics : savedService._id}
+            });
         }catch(err){
             next(err);
         }
@@ -36,6 +43,7 @@ export const updateService =   async (req, res) => {
 export const deleteService =  async (req, res) => {
     const cityId = req.params.cityId; 
     const typeId = req.params.typeId;
+    const userId = req.params.userId;
     try{
         await Service.findByIdAndDelete(req.params.id);
         try {
@@ -46,6 +54,12 @@ export const deleteService =  async (req, res) => {
             });
 
             await Type.findByIdAndUpdate(typeId , {
+                $pull : {
+                    servics : req.params.id
+                }
+            });
+
+            await User.findByIdAndUpdate(userId , {
                 $pull : {
                     servics : req.params.id
                 }
