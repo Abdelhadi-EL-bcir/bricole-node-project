@@ -31,16 +31,16 @@ export const createService =  async (req, res , next) => {
     }
 };
 
-export const updateService =   async (req, res) => {
+export const updateService =   async (req, res ,next) => {
     try {
         const updatedService = await Service.findByIdAndUpdate(req.params.id ,{$set : req.body} ,{new : true});
         res.status(200).json(updatedService);
     } catch (err) {
-        res.status(500).json(err);
+        next(err);
     }
 }
 
-export const deleteService =  async (req, res) => {
+export const deleteService =  async (req, res , next) => {
     const cityId = req.params.cityId; 
     const typeId = req.params.typeId;
     const userId = req.params.userId;
@@ -78,7 +78,7 @@ export const getService =  async (req, res) => {
         const service = await Service.findById(req.params.id);
         res.status(200).json(service);
     } catch (err) {
-        res.status(500).json(err);
+        next(err);
     }
 };
 
@@ -88,6 +88,6 @@ export const getServices =  async (req, res , next) => {
         const servics = await Service.find();
         res.status(200).json(servics);
     } catch (err) {
-        res.status(500).json(err);
+        next(err);
     }
 }
