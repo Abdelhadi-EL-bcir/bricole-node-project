@@ -1,12 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
+import cookieParser from "cookie-parser";
 import authRoute from "./routes/auth.js";
 import userRoute from "./routes/user.js";
 import serviceRoute from "./routes/service.js";
 import cityRoute from "./routes/city.js";
 import typeRoute from "./routes/type.js";
-import cookieParser from "cookie-parser";
+
 
 
 const app = express();
