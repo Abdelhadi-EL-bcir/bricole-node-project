@@ -7,7 +7,7 @@ import userRoute from "./routes/user.js";
 import serviceRoute from "./routes/service.js";
 import cityRoute from "./routes/city.js";
 import typeRoute from "./routes/type.js";
-
+import reviewRoute from "./routes/review.js";
 
 
 const app = express();
@@ -37,6 +37,7 @@ app.use("/api/user" , userRoute);
 app.use("/api/service" , serviceRoute);
 app.use("/api/city" , cityRoute);
 app.use("/api/type" , typeRoute);
+app.use("/api/review" , reviewRoute);
 
 
 app.use((err,req,res,next)=>{

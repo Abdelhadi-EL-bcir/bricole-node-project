@@ -10,11 +10,11 @@ export const createReview = async (req, res, next) => {
         const savedReview = await newReview.save();
         try {
             await User.findByIdAndUpdate(userId, {
-                $push: { reviews: savedService._id }
+                $push: { reviews: savedReview._id }
             });
 
             await Service.findByIdAndUpdate(serviceId, {
-                $push: { reviews: savedService._id }
+                $push: { reviews: savedReview._id }
             })
             res.status(200).json(savedReview);
         } catch (err) {
@@ -40,13 +40,13 @@ export const deleteReview = async (req, res, next) => {
     try {
         await Review.findByIdAndDelete(req.params.id);
         try {
-            await City.findByIdAndUpdate(userId , {
+            await User.findByIdAndUpdate(userId , {
                 $pull : {
                     reviews : req.params.id
                 }
             });
 
-            await Type.findByIdAndUpdate(serviceId , {
+            await Service.findByIdAndUpdate(serviceId , {
                 $pull : {
                     reviews : req.params.id
                 }

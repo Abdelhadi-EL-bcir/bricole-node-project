@@ -1,13 +1,13 @@
 import mongoose from "mongoose";
-const TypeSchema = new mongoose.Schema({
+const ReviewSchema = new mongoose.Schema({
     comment  :{
         type : String , 
         required :true
     } , 
     ratting : {
-        type : number , 
+        type : Number , 
     } , 
 
 }) 
 
-export default mongoose.model("Type" , TypeSchema);
+export default mongoose.model("Review" , ReviewSchema);
