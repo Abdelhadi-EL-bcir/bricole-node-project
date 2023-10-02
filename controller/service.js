@@ -91,3 +91,12 @@ export const getServices =  async (req, res , next) => {
         next(err);
     }
 }
+
+export const getServicesByType = () => {
+    
+}
+
+
+export const getServicesByCity = ()=>{
+    
+}
