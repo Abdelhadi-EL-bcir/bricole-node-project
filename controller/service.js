@@ -111,16 +111,20 @@ export const getServicesByCity = async (req, res, next) => {
   };
 
 
-export const getServicesByType = async ()=>{
-    let typeId = req.params.typeId;
-    try{
-        const type = await City.findById(typeId);
-        let list = [];
-        type.servics.forEach((item)=>{
-           list.push(Service.find(Service.findById(item)))
-        });
-        res.status(200).json(list);
-    }catch(err){
-        next(err);
+export const getServicesByType = async (req, res, next) => {
+    try {
+      const typeId = req.params.typeId;
+      const type = await Type.findById(typeId).exec();
+  
+      if (!type) {
+        return res.status(404).json({ message: 'Type not found' });
+      }
+  
+      const serviceIds = type.servics;
+      const services = await Service.find({ _id: { $in: serviceIds } }).exec();
+  
+      res.status(200).json(services);
+    } catch (err) {
+      next(err);
     }
-}
+  };
