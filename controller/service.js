@@ -92,11 +92,35 @@ export const getServices =  async (req, res , next) => {
     }
 }
 
-export const getServicesByType = () => {
-    
-}
+export const getServicesByCity = async (req, res, next) => {
+    try {
+      const cityId = req.params.cityId;
+      const city = await City.findById(cityId).exec();
+  
+      if (!city) {
+        return res.status(404).json({ message: 'City not found' });
+      }
+  
+      const serviceIds = city.servics;
+      const services = await Service.find({ _id: { $in: serviceIds } }).exec();
+  
+      res.status(200).json(services);
+    } catch (err) {
+      next(err);
+    }
+  };
 
 
-export const getServicesByCity = ()=>{
-    
+export const getServicesByType = async ()=>{
+    let typeId = req.params.typeId;
+    try{
+        const type = await City.findById(typeId);
+        let list = [];
+        type.servics.forEach((item)=>{
+           list.push(Service.find(Service.findById(item)))
+        });
+        res.status(200).json(list);
+    }catch(err){
+        next(err);
+    }
 }
